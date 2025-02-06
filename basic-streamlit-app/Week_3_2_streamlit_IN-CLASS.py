@@ -16,7 +16,7 @@ st.markdown("## This is my first streamlit app!")
 if st.button("Click me!"):
     st.write("You clicked the button. Nice work!")
 else:
-    st.write("Go ahead...click the button. I dare you.")
+    st.write("Go ahead... click the button. I dare you.")
 # ------------------------
 # COLOR PICKER WIDGET
 # ------------------------
