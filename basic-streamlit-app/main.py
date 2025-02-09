@@ -1,66 +1,51 @@
 import streamlit as st
 import pandas as pd
 
-# ================================
-# Step 1: Displaying a Simple DataFrame in Streamlit
-# ================================
+st.title("Penguin Filter Hub")
+st.text("Dive into the world of penguins! Filter and explore data on species, islands, bill size, and body mass!")
 
-st.subheader("Now, let's look at some data!")
-
-# Creating a simple DataFrame manually
-# This helps students understand how to display tabular data in Streamlit.
-df = pd.DataFrame({
-    'Name': ['Alice', 'Bob', 'Charlie', 'David'],
-    'Age': [25, 30, 35, 40],
-    'City': ['New York', 'Los Angeles', 'Chicago', 'Houston']
-})
-
-# Displaying the table in Streamlit
-# st.dataframe() makes it interactive (sortable, scrollable)
-st.write("Here's a simple table:")
-st.dataframe(df)
-
-# ================================
-# Step 2: Adding User Interaction with Widgets
-# ================================
-
-# Using a selectbox to allow users to filter data by city
-# Students learn how to use widgets in Streamlit for interactivity
-city = st.selectbox("Select a city", df["City"].unique())
-
-# Filtering the DataFrame based on user selection
-filtered_df = df[df["City"] == city]
-
-# Display the filtered results
-st.write(f"People in {city}:")
-st.dataframe(filtered_df)
-
-# ================================
-# Step 3: Importing Data Using a Relative Path
-# ================================
-
-# Now, instead of creating a DataFrame manually, we load a CSV file
-# This teaches students how to work with external data in Streamlit
-# # Ensure the "data" folder exists with the CSV file
 # Display the imported dataset
 df2 = pd.read_csv("basic-streamlit-app\data\penguins.csv")
 st.dataframe(df2)
 
-# Using a selectbox to allow users to filter data by city
-# Students learn how to use widgets in Streamlit for interactivity
-bill_length = st.slider("Choose a salary range:", 
-                   min_value = df2["bill_length_mm"].min(),
-                   max_value = df2["bill_length_mm"].max())
+# filters penguins by body mass 
+body_mass = st.slider("Choose a body mass range:", 
+                   min_value = df2["body_mass_g"].min(),
+                   max_value = df2["body_mass_g"].max())
 
 # Filtering the DataFrame based on user selection
-st.write(f"Bill length under {bill_length}:")
-st.dataframe(df2[df2['bill_length_mm'] <= bill_length])
+st.write(f"Body mass under {body_mass}:")
+st.dataframe(df2[df2['body_mass_g'] <= body_mass])
+
+# filters penguins by species 
+species = st.selectbox("Select a species", df2["species"].unique())
+
+# Filtering the DataFrame based on user selection
+filtered_df = df2[df2["species"] == species]
 
 # Display the filtered results
+st.write(f"{species} penguins:")
+st.dataframe(filtered_df)
 
-# ================================
-# Summary of Learning Progression:
-# 1️⃣ Displaying a basic DataFrame in Streamlit.
-# 2️⃣ Adding user interaction with selectbox widgets.
-# 3️⃣ Importing real-world datasets using a relative path.
-# ================================
+# filters penguins by flipper length 
+flipper_length = st.slider("Choose a fliper length range:", 
+                   min_value = df2["flipper_length_mm"].min(),
+                   max_value = df2["flipper_length_mm"].max())
+
+# Filtering the DataFrame based on user selection
+st.write(f"Flipper length under {flipper_length}:")
+st.dataframe(df2[df2['flipper_length_mm'] <= flipper_length])
+
+# Filtering the DataFrame based on user selection
+st.write(f"Body mass under {body_mass}:")
+st.dataframe(df2[df2['body_mass_g'] <= body_mass])
+
+# filters penguins by island 
+island = st.selectbox("Select an island", df2["island"].unique())
+
+# Filtering the DataFrame based on user selection
+filtered_df = df2[df2["island"] == island]
+
+# Display the filtered results
+st.write(f"{island} penguins:")
+st.dataframe(filtered_df)
