@@ -1,6 +1,4 @@
-# this is my ds streamlit app
-
-### 🐧 Penguin Data Explorer
+# 🐧 Penguin Data Explorer
 
 An interactive Streamlit app for filtering and analyzing Palmer Penguin dataset based on body mass, species, flipper length, and island. This tool allows users to explore key characteristics of different penguin species in an intuitive and user-friendly interface.
 
