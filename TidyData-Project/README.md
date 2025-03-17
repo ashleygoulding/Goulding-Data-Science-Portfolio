@@ -36,7 +36,7 @@ jupyter notebook
 
 3. Run the notebook cells sequentially to:
 
-- ✨ ✨ Clean and preprocess the dataset by handling missing values, standardizing formats, and removing outliers.
+- ✨ Clean and preprocess the dataset by handling missing values, standardizing formats, and removing outliers.
 - 🔄 Reshape the dataset into a tidy format using `pd.melt()` to ensure variables are aligned in columns and rows properly.
 - 📊 Generate visualizations to explore trends such as total value trends, source contributions over time, and valuation distributions.
   
@@ -62,13 +62,14 @@ For further reading on tidy data principles and data manipulation techniques, se
 
 Below are examples of the visualizations generated in this project:
 - 📊 Total Value Trends Over Decades (Line Chart)
+  
 ![image](https://github.com/user-attachments/assets/c06c9401-7869-4a18-a18d-5f56ba50b4ad)
-- 📉 Source Contribution Over Time (Stacked Bar Chart)
-![image](https://github.com/user-attachments/assets/6f98da3c-32b5-4369-a097-e78208e31a7d)
-- 📦 Valuation Distribution by Source (Boxplot)
-![image](https://github.com/user-attachments/assets/f4452157-f509-4e42-8148-844c346951a6)
-- 🔥 Heatmaps of Member Valuations by Source and Decade
-![image](https://github.com/user-attachments/assets/754caa56-05b0-408a-b606-012054ea7a69)
-![image](https://github.com/user-attachments/assets/6c833c89-a0a7-4a97-8e13-332cb6df35f5)
 
+- 📉 Source Contribution Over Time (Stacked Bar Chart)
+  
+![image](https://github.com/user-attachments/assets/6f98da3c-32b5-4369-a097-e78208e31a7d)
+
+- 📦 Valuation Distribution by Source (Boxplot)
+  
+![image](https://github.com/user-attachments/assets/f4452157-f509-4e42-8148-844c346951a6)
 
