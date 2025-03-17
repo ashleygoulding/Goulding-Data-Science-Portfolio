@@ -12,7 +12,7 @@ A summary of all projects can be seen below:
 -    Tidy Data Project
 
 ----------------------------------------------------------------------
-## Project 1
+## Basic Streamlit App 
 
    - What is the Problem? : explaination here
    - How did I solve it? : explaination here
@@ -20,6 +20,7 @@ A summary of all projects can be seen below:
 will add photos and/or videos to demonstrate here
 
 ----------------------------------------------------------------------
+## Tidy Data Project
 
 #### The Problem
 
@@ -32,6 +33,9 @@ To solve this, I applied Tidy Data Principles to clean, transform, and restructu
 - Reshaping the dataset: Using `pd.melt()` to convert wide-format data into a long, tidy format.
 - Summarizing insights: Creating pivot tables with `pd.pivot()` to analyze trends by source and decade.
 - Visualizing key findings: Generating charts to highlight patterns and trends effectively.
+
+![image](https://github.com/user-attachments/assets/70c16f4f-eaaa-4a06-97ea-be87278704aa)
+![image](https://github.com/user-attachments/assets/72c176b3-bb5a-421a-a930-a200ae0c250f)
 
 ### How this Complements My Portfolio
 
