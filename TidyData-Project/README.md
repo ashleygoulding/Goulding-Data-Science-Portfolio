@@ -28,3 +28,34 @@ jupyter notebook
 - ✨ Clean and preprocess the data.
 - 🔄 Reshape the dataset into a tidy format.
 - 📊 Generate visualizations to explore trends
+
+# 📂 Dataset Description
+
+- 📖 Source: The dataset contains structured information on valuations across different decades, sources, and members.
+
+- 🔍 Preprocessing Steps:
+  - 🧹 Removing special characters from numerical values.
+  - 🔄 Converting data into a structured, long format using pd.melt().
+  - 📊 Creating pivot tables to summarize key trends.
+
+🔗 References
+
+For further reading on tidy data principles and data manipulation techniques, see:
+
+📄 Pandas Cheat Sheet
+
+📑 Tidy Data Paper by Hadley Wickham
+
+📈 Visual Examples
+
+Below are examples of the visualizations generated in this project:
+
+📊 Total Value Trends Over Decades (Line Chart)
+
+📉 Source Contribution Over Time (Stacked Bar Chart)
+
+📦 Valuation Distribution by Source (Boxplot)
+
+🔥 Heatmaps of Member Valuations by Source and Decade
+
+For more details, run the notebook and explore the results interactively! 🎯
