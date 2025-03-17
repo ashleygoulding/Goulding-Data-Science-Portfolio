@@ -14,6 +14,8 @@ A summary of all projects can be seen below:
 ----------------------------------------------------------------------
 ### Penguin Filter Hub
 
+[Click here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/blob/main/basic-streamlit-app/main.py)
+
 #### The Problem
 
 Exploring large datasets can be overwhelming, especially when users need to filter and analyze specific subsets of data. The penguin dataset includes multiple attributes such as species, body mass, flipper length, and island location. Without an interactive interface, identifying trends and making meaningful observations is challenging.
@@ -36,6 +38,8 @@ This project showcases my ability to:
 
 ----------------------------------------------------------------------
 ## Mutant Moneyball Cleaning and Analysis
+
+[Click here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData.ipynb)
 
 #### The Problem
 
