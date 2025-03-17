@@ -38,24 +38,17 @@ jupyter notebook
   - 🔄 Converting data into a structured, long format using pd.melt().
   - 📊 Creating pivot tables to summarize key trends.
 
-🔗 References
+# 🔗 References
 
 For further reading on tidy data principles and data manipulation techniques, see:
 
-📄 Pandas Cheat Sheet
+- 📄 Pandas Cheat Sheet
+- 📑 Tidy Data Paper by Hadley Wickham
 
-📑 Tidy Data Paper by Hadley Wickham
-
-📈 Visual Examples
+# 📈 Visual Examples
 
 Below are examples of the visualizations generated in this project:
-
-📊 Total Value Trends Over Decades (Line Chart)
-
-📉 Source Contribution Over Time (Stacked Bar Chart)
-
-📦 Valuation Distribution by Source (Boxplot)
-
-🔥 Heatmaps of Member Valuations by Source and Decade
-
-For more details, run the notebook and explore the results interactively! 🎯
+- 📊 Total Value Trends Over Decades (Line Chart)
+- 📉 Source Contribution Over Time (Stacked Bar Chart)
+- 📦 Valuation Distribution by Source (Boxplot)
+- 🔥 Heatmaps of Member Valuations by Source and Decade
