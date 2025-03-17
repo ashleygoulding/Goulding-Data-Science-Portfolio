@@ -13,10 +13,18 @@ By following these principles, we make data manipulation, visualization, and ana
 Ensure you have Python installed along with the following dependencies:
 ```bash
 pip install pandas numpy matplotlib seaborn
-
+```
 # 🚀 Running the Notebook
 
-Open the Jupyter Notebook environment:
+1. Open the Jupyter Notebook environment:
 
 ```bash
 jupyter notebook
+```
+2. Navigate to the project directory and open TidyData.ipynb.
+
+3. Run the notebook cells sequentially to:
+
+- ✨ Clean and preprocess the data.
+- 🔄 Reshape the dataset into a tidy format.
+- 📊 Generate visualizations to explore trends
