@@ -61,15 +61,16 @@ For further reading on tidy data principles and data manipulation techniques, se
 # 📈 Visual Examples
 
 Below are examples of the visualizations generated in this project:
-- 📊 Total Value Trends Over Decades (Line Chart)
+
+### 📊 Total Value Trends Over Decades (Line Chart)
   
 ![image](https://github.com/user-attachments/assets/c06c9401-7869-4a18-a18d-5f56ba50b4ad)
 
-- 📉 Source Contribution Over Time (Stacked Bar Chart)
+### 📉 Source Contribution Over Time (Stacked Bar Chart)
   
 ![image](https://github.com/user-attachments/assets/6f98da3c-32b5-4369-a097-e78208e31a7d)
 
-- 📦 Valuation Distribution by Source (Boxplot)
+### 📦 Valuation Distribution by Source (Boxplot)
   
 ![image](https://github.com/user-attachments/assets/f4452157-f509-4e42-8148-844c346951a6)
 
