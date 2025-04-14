@@ -86,10 +86,10 @@ To address this challenge, I developed an interactive app using Streamlit that a
 
 #### Model Evaluation Visualization Examples
 
-**Confusion Matrix**
+##### Confusion Matrix
 <img width="525" alt="image" src="https://github.com/user-attachments/assets/52dbbbd3-a749-42b4-a2b7-26fab241a313" />
 
-**ROC Curve**
+##### ROC Curve
 <img width="525" alt="image" src="https://github.com/user-attachments/assets/678f57b1-4ecb-4290-bb0f-e5deaa771a1d" />
 
 #### How this Complements my Portfolio
