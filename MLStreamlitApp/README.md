@@ -102,6 +102,131 @@ The app currently supports the following classification models:
 
 ---
 
+## App Features
+
+Explore the power of machine learning with these intuitive features:
+
+<br>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;">📤 Dataset Upload & Preview</h4>
+        <p style="margin-bottom: 10px;">
+            Effortlessly upload your own CSV datasets to unlock personalized analysis. If you're just exploring, the classic Iris dataset is ready to go! Get a quick glimpse of your data with the integrated preview.
+        </p>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+            <li>Supports CSV file uploads.</li>
+            <li>Loads the Iris dataset as a default.</li>
+            <li>Displays a clear preview of the first few rows.</li>
+        </ul>
+    </div>
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;">🎯 Feature & Target Selection</h4>
+        <p style="margin-bottom: 10px;">
+            Clearly define your prediction goals by selecting a single target variable and the relevant features that will drive your model. The app intelligently handles different data types.
+        </p>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+            <li>Intuitive selection of the target column.</li>
+            <li>Easy multi-select for feature columns.</li>
+            <li>Automatic handling of categorical target variables (Label Encoding).</li>
+            <li>Automatic handling of categorical features (One-Hot Encoding).</li>
+            <li>Intelligent removal of rows with missing data.</li>
+        </ul>
+    </div>
+
+</div>
+
+<br>
+
+<h3 style="color: #336699;">🤖 Explore Powerful Classification Models</h3>
+<p>Dive into the world of supervised learning with these carefully integrated models:</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 15px;">
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;"><span style="font-size: 1.2em;">📈</span> Logistic Regression</h4>
+        <p style="margin-bottom: 10px;">
+            A fundamental algorithm for binary and multiclass classification. Adjust the regularization strength (`C`) to control model complexity and prevent overfitting.
+        </p>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+            <li>Interactive slider for the `C` hyperparameter.</li>
+            <li>Clear display of the learned model coefficients.</li>
+        </ul>
+    </div>
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;"><span style="font-size: 1.2em;">🌳</span> Decision Tree</h4>
+        <p style="margin-bottom: 10px;">
+            A tree-based model that makes decisions based on a series of rules. Control the tree's depth (`max_depth`) to balance model complexity and interpretability.
+        </p>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+            <li>Interactive slider for the `max_depth` hyperparameter.</li>
+            <li>Visual representation of the decision tree structure.</li>
+        </ul>
+    </div>
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;"><span style="font-size: 1.2em;"><0xE2><0x9C><0x8E></span> K-Nearest Neighbors (KNN)</h4>
+        <p style="margin-bottom: 10px;">
+            A simple yet effective algorithm that classifies data points based on the majority class among their `k` nearest neighbors. Experiment with different values of `k`.
+        </p>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+            <li>Interactive slider for the number of neighbors (`n_neighbors`).</li>
+            <li>Visual exploration of accuracy across different `k` values.</li>
+        </ul>
+    </div>
+
+</div>
+
+<br>
+
+<h3 style="color: #336699;">📊 Comprehensive Model Evaluation</h3>
+<p>Gain deep insights into your model's performance with these detailed metrics and visualizations:</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 15px;">
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;">✅ Key Performance Metrics</h4>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+            <li>**Accuracy:** Overall correctness of the model.</li>
+            <li>**Precision:** Ability of the model to avoid false positives.</li>
+            <li>**Recall:** Ability of the model to identify all relevant instances.</li>
+            <li>Clear display of each metric for immediate understanding.</li>
+        </ul>
+    </div>
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;"><span style="font-size: 1.2em;"><0xF0><0x9F><0x97><0x82></span> Confusion Matrix</h4>
+        <p style="margin-bottom: 10px;">
+            Visualize the distribution of true positives, true negatives, false positives, and false negatives to understand where your model excels and where it struggles.
+        </p>
+    </div>
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;"><span style="font-size: 1.2em;">📄</span> Detailed Classification Report</h4>
+        <p style="margin-bottom: 10px;">
+            Get a class-by-class breakdown of precision, recall, F1-score, and support, providing a granular view of your model's performance on each category.
+        </p>
+    </div>
+
+    <div style="flex: 1 1 300px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px #eee;">
+        <h4 style="color: #336699; margin-top: 0;"><span style="font-size: 1.2em;">📈</span> ROC Curve (Binary Classifiers)</h4>
+        <p style="margin-bottom: 10px;">
+            For binary classification tasks, the Receiver Operating Characteristic (ROC) curve visually represents the trade-off between the true positive rate and the false positive rate across different classification thresholds. The Area Under the Curve (AUC) summarizes the model's overall discriminatory power.
+        </p>
+    </div>
+
+</div>
+
+<br>
+
+<h3 style="color: #336699;">⚙️ Interactive Hyperparameter Tuning</h3>
+<p>Experiment and fine-tune your models effortlessly using intuitive sliders in the sidebar. Observe in real-time how different hyperparameter settings impact model performance.</p>
+
+--
+
 ## 🖼️ Visual Examples
 
 ### Confusion Matrix
