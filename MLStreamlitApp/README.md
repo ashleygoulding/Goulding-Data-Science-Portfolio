@@ -8,10 +8,10 @@ A web-based interactive application built with Streamlit to explore and visualiz
 
 The Supervised Machine Learning Explorer provides an intuitive interface for beginners and intermediate users to:
 
--Load or upload datasets (default is the Iris dataset)
--Select features and target variable
--Apply and compare multiple classification models
--Visualize performance with confusion matrices, ROC curves, and classification reports
+- Load or upload datasets (default is the Iris dataset)
+- Select features and target variable
+- Apply and compare multiple classification models
+- Visualize performance with confusion matrices, ROC curves, and classification reports
 
 Whether you're learning ML or building prototypes, this tool helps make model experimentation fast, visual, and interactive.
 
@@ -79,23 +79,28 @@ The app currently supports the following classification models:
 
 ### 4️⃣ Model Evaluation Metrics:
 After training and making predictions, the app displays the following evaluation metrics:
-    -   **Accuracy:** The overall proportion of correctly classified instances.
-    -   **Precision:** The proportion of correctly predicted positive instances out of all instances predicted as positive (for each class, weighted average is shown for multiclass).
-    -   **Recall:** The proportion of correctly predicted positive instances out of all actual positive instances (for each class, weighted average is shown for multiclass).
+
+- **Accuracy:** The overall proportion of correctly classified instances.
+- **Precision:** The proportion of correctly predicted positive instances out of all instances predicted as positive (for each class, weighted average is shown for multiclass).
+- **Recall:** The proportion of correctly predicted positive instances out of all actual positive instances (for each class, weighted average is shown for multiclass).
 
 #### Confusion Matrix:
--   A visual representation of the model's performance, showing the counts of true positives, true negatives, false positives, and false negatives.
+A visual representation of the model's performance, showing the counts of true positives, true negatives, false positives, and false negatives.
+
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/52dbbbd3-a749-42b4-a2b7-26fab241a313" />
 
 #### Classification Report:
--   A detailed report providing precision, recall, F1-score, and support for each class in the target variable.
+A detailed report providing precision, recall, F1-score, and support for each class in the target variable.
 
 #### ROC Curve (for Binary Classification):
 -   For binary classification problems (where the target variable has only two unique values), the app displays the Receiver Operating Characteristic (ROC) curve.
 -   It also calculates and displays the Area Under the Curve (AUC), which summarizes the overall performance of the model across all classification thresholds.
 -   A warning is displayed if the target variable is not binary or if the selected model does not support probability predictions.
 
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/678f57b1-4ecb-4290-bb0f-e5deaa771a1d" />
+
 #### Hyperparameter Tuning: 
--   Key hyperparameters for each selected model are exposed through interactive sliders in the sidebar, allowing users to easily experiment with different settings and observe their impact on model performance.
+Key hyperparameters for each selected model are exposed through interactive sliders in the sidebar, allowing users to easily experiment with different settings and observe their impact on model performance.
 
 ---
 
