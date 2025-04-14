@@ -83,11 +83,11 @@ Get real-time feedback on model performance:
 ## 🖼️ Visual Examples
 
 ### Confusion Matrix
-![image](https://github.com/user-attachments/assets/2f4b9178-4cd2-40f9-8c57-e8abcaf66d04)
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/52dbbbd3-a749-42b4-a2b7-26fab241a313" />
 
 ### Decision Tree
 <img width="525" alt="image" src="https://github.com/user-attachments/assets/2a9fed58-a51a-4feb-91f2-8b8fbe468faa" />
 
 ### ROC Curve
-![image](https://github.com/user-attachments/assets/00e86ab5-fc8e-48fc-868b-5601417e37eb)
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/678f57b1-4ecb-4290-bb0f-e5deaa771a1d" />
 
