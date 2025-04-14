@@ -1,20 +1,25 @@
-# 🌟 Supervised Machine Learning Explorer
+# 🧠 Supervised Machine Learning Explorer
 
-An interactive Streamlit web application that allows users to explore, train, and evaluate supervised machine learning models — without writing any code!
+A web-based interactive application built with Streamlit to explore and visualize supervised machine learning models. Upload your dataset, select target variables and features, tune model hyperparameters, and gain insights through detailed metrics and visualizations — all from your browser!
 
 ---
 
 ## 📌 Project Overview
 
-This application is designed to make machine learning approachable for beginners and useful for practitioners. Users can upload a dataset, select their target and feature columns, choose a classification algorithm, tune its hyperparameters, and view performance metrics and visualizations — all within a clean, intuitive interface.
+The Supervised Machine Learning Explorer provides an intuitive interface for beginners and intermediate users to:
 
-If no dataset is uploaded, the app defaults to the popular Iris dataset.
+-Load or upload datasets (default is the Iris dataset)
+-Select features and target variable
+-Apply and compare multiple classification models
+-Visualize performance with confusion matrices, ROC curves, and classification reports
+
+Whether you're learning ML or building prototypes, this tool helps make model experimentation fast, visual, and interactive.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 How to Run the App
 
-### ✅ Requirements
+### 🔧 Requirements
 
 Make sure you have the following installed:
 
