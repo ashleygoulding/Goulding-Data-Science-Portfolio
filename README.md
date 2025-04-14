@@ -10,6 +10,7 @@ A summary of all projects can be seen below:
 
 -    Penguin Filter Hub
 -    Mutant Moneyball Cleaning and Analysis
+-    Supervised Machine Learning Explorer
 
 ----------------------------------------------------------------------
 ### Penguin Filter Hub
