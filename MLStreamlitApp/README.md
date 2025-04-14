@@ -36,3 +36,49 @@ Install dependencies using pip:
 
 ```bash
 pip install streamlit pandas numpy seaborn matplotlib scikit-learn graphviz
+```
+
+### ▶️ Running the App
+
+To run the app, paste the following code in the terminal:
+
+```bash
+streamlit run MLStreamlitApp\ml_app.py
+```
+### 🌐 Try it Online
+
+Additionally, you can also access the app by using this [link](https://goulding-data-science-portfolio-ma7wqhuxjsyvzceqycydvu.streamlit.app/) to go straight to the app on your browser
+
+---
+
+## ⚙️ App Features
+
+### 1️⃣ Upload a Dataset
+Upload your own `.csv` file or use the default Iris dataset.
+
+### 2️⃣ Dataset Preview
+View the top rows of your dataset in a clean table.
+
+### 3️⃣ Select Target and Features
+Choose which column to predict and which features to use.
+
+### 4️⃣ Model Selection
+Choose from three classifiers:
+- **Logistic Regression**
+- **Decision Tree**
+- **K-Nearest Neighbors**
+  
+Each model includes interactive widgets in the sidebar to customize hyperparameters like:
+- `C` for regularization strength (Logistic Regression)
+- `max_depth` (Decision Tree)
+- `k` neighbors (KNN)
+
+### 📊 Model Evaluation
+Get real-time feedback on model performance:
+- Accuracy, precision, recall
+- Confusion matrix
+- ROC curve (for binary classifiers)
+- Full classification report
+
+### 🌲 Decision Tree Visualization
+<img width="517" alt="image" src="https://github.com/user-attachments/assets/6ee87c73-9087-42ef-998b-4d3e3d61dcd4" />
