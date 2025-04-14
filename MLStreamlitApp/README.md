@@ -92,7 +92,7 @@ A visual representation of the model's performance, showing the counts of true p
 #### Classification Report:
 A detailed report providing precision, recall, F1-score, and support for each class in the target variable.
 
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/f9e55e29-4641-423f-8783-9c61f89813cc" />
+<img width="925" alt="image" src="https://github.com/user-attachments/assets/f9e55e29-4641-423f-8783-9c61f89813cc" />
 
 #### ROC Curve (for Binary Classification):
 -   For binary classification problems (where the target variable has only two unique values), the app displays the Receiver Operating Characteristic (ROC) curve.
