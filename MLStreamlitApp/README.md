@@ -80,5 +80,14 @@ Get real-time feedback on model performance:
 - ROC curve (for binary classifiers)
 - Full classification report
 
-### 🌲 Decision Tree Visualization
-<img width="517" alt="image" src="https://github.com/user-attachments/assets/6ee87c73-9087-42ef-998b-4d3e3d61dcd4" />
+## 🖼️ Visual Examples
+
+### Confusion Matrix
+![image](https://github.com/user-attachments/assets/2f4b9178-4cd2-40f9-8c57-e8abcaf66d04)
+
+### Decision Tree
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/2a9fed58-a51a-4feb-91f2-8b8fbe468faa" />
+
+### ROC Curve
+![image](https://github.com/user-attachments/assets/00e86ab5-fc8e-48fc-868b-5601417e37eb)
+
