@@ -163,8 +163,20 @@ Use the slider to adjust `k` — the number of clusters. Look at the **Silhouett
     plot_pca_clusters(X, labels, "PCA-based Cluster Visualization")
 
     st.markdown("#### 📉 Elbow Method Plot")
-    st.markdown("Use this plot to determine a good value of `k` by looking for the point where the curve begins to flatten.")
-    plot_elbow(X)
+    st.markdown("""
+    This plot helps you choose the **optimal number of clusters (k)** in K-Means.
+
+    - The **x-axis** shows different values of `k` (clusters).
+    - The **y-axis** shows the **inertia**, or within-cluster sum of squares (how compact clusters are).
+
+    **How to interpret:**
+    - You're looking for the **'elbow point'** — where the inertia decreases sharply and then flattens out.
+    - This point balances compactness and complexity: adding more clusters beyond this gives diminishing returns.
+
+    **Why it matters:**  
+    Too few clusters = underfitting (merging distinct groups),  
+    Too many clusters = overfitting (splitting true groups unnecessarily).
+    """)
 
 # ================================
 # HIERARCHICAL CLUSTERING
@@ -197,15 +209,37 @@ We still cut the tree into a specific number of clusters for evaluation.
     st.write(f"**Silhouette Score:** {silhouette:.3f}")
 
     st.markdown("#### 🔍 Cluster Visualization (via PCA)")
-    st.markdown("PCA is used to visualize the hierarchical clusters.")
+    st.markdown("""
+    This plot reduces your data to 2D using **Principal Component Analysis (PCA)**, then colors points based on the clustering result.
+
+    **Why use PCA here?**
+    - High-dimensional data can't be visualized easily.
+    - PCA projects it onto 2D while preserving variance.
+    - It lets us *see* how well-separated the clusters are.
+
+    **How to interpret:**
+    - Each point is a data row.
+    - Clusters should appear as distinct, tight groups.
+    - Overlapping clusters may indicate poor separation or that more informative features are needed.
+    """)
     plot_pca_clusters(X, labels, "PCA-based Cluster Visualization")
 
     st.markdown("#### 🌲 Dendrogram")
     st.markdown("""
-This shows the clustering tree. Cut the tree horizontally to see how points merge into clusters.
-- The height of branches shows the distance (dissimilarity) at which clusters merge.
-- Look for large vertical gaps before a merge — they indicate natural splits.
-""")
+    The dendrogram shows the **hierarchical merging process** between observations in the dataset.
+
+    **How to interpret:**
+    - **Each leaf** is a data point.
+    - **Merges** (horizontal lines) show which points/clusters are grouped together and at what **dissimilarity level**.
+    - **Vertical height** of lines indicates how far apart clusters are.
+    - Cutting the dendrogram at a given height gives you the desired number of clusters.
+
+    **Look for:**
+    - **Large vertical gaps** between horizontal lines — these suggest natural groupings.
+    - Flat merges near the bottom mean similar data points; tall merges mean bigger jumps in dissimilarity.
+
+    This helps you understand both structure and how many clusters make sense in your data.
+    """)
     plot_dendrogram(X, linkage_method)
 
 # ================================
@@ -249,5 +283,21 @@ This shows how much variance (information) is captured by each component. Try to
     st.pyplot(plt)
 
     st.markdown("#### 📈 Variance Explained Plot")
-    st.markdown("This plot helps determine how many principal components are worth keeping.")
+    st.markdown("""
+    This graph shows how much of the total variance (information) in your dataset is captured by each principal component.
+
+    **How to interpret:**
+    - The **x-axis** is the principal component index.
+    - The **y-axis** is the proportion of total variance explained.
+
+    **Look for:**
+    - The **elbow point** here helps decide how many components to keep.
+    - Typically, choose enough components to explain **80–95%** of the variance.
+
+    **Why it matters:**
+    - Retaining too few components may lose important information.
+    - Keeping too many defeats the purpose of dimensionality reduction.
+
+    Use this plot alongside your knowledge of the data to decide how much complexity is needed.
+    """)
     plot_pca_variance(pca)
