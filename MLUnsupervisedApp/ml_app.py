@@ -107,6 +107,17 @@ else:
     st.warning("📂 Please upload a dataset or select a sample one from the sidebar.")
     st.stop()
 
+# Handle missing data
+if df.isnull().sum().any():
+    st.warning("⚠️ Your dataset contains missing values. Please consider handling them.")
+    action = st.radio("How would you like to handle missing data?", ["Remove rows", "Fill with mean", "Fill with median"], index=0)
+    if action == "Remove rows":
+        df = df.dropna()
+    elif action == "Fill with mean":
+        df = df.fillna(df.mean())
+    elif action == "Fill with median":
+        df = df.fillna(df.median())
+
 # Show dataset preview
 st.subheader("📊 Dataset Preview")
 st.markdown("Here’s the first few rows of your dataset. Make sure it’s clean and contains mostly numeric data for clustering.")
