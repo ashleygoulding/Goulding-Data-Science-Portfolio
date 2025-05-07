@@ -149,16 +149,21 @@ if method == "K-Means Clustering":
     st.subheader("📈 K-Means Clustering")
 
     st.markdown("""
-    K-Means attempts to partition the dataset into **k distinct, non-overlapping clusters** based on feature similarity.
-
-    Use the slider to adjust `k` — the number of clusters. Look at the **Silhouette Score** and **Elbow Plot** to find the best `k`.
-
-    - A **higher silhouette score (close to 1)** means well-separated clusters.
-    - The **elbow point** in the Elbow Plot suggests the optimal k.
+    K-Means partitions your dataset into **k distinct clusters** by minimizing the variance within each cluster.
+    - Adjust the number of clusters (`k`) to control granularity.
+    - Use PCA to visualize high-dimensional data in 2D.
+    - Analyze **silhouette score**, **inertia**, and the **elbow point** to determine the best `k`.
+    
+    **Sidebar Navigation**
+    - **k (Number of Clusters):** Determines how many groups the algorithm tries to separate your data into.
+    - **PCA Components (for 2D visualization):** Number of principal components used to reduce dimensionality and plot your data.
     """)
 
-    # Cluster number selector
-    k = st.sidebar.slider("Number of clusters (k)", 2, 10, 3)
+    # Sidebar Widgets
+    k = st.sidebar.slider("Number of Clusters (k)", 2, 10, 3,
+                          help="Set the number of groups the algorithm should divide your data into.")
+    n_components = st.sidebar.slider("Number of PCA Components", 2, min(X.shape[1], 10), 2,
+                                     help="Controls how many principal components are used for dimensionality reduction.")
 
     # Fit KMeans model
     kmeans = KMeans(n_clusters=k, random_state=0)
@@ -166,7 +171,8 @@ if method == "K-Means Clustering":
     
     # Silhouette Score evaluation
     silhouette = silhouette_score(X, clusters)
-    st.write(f"**Silhouette Score:** {silhouette:.3f}")
+    st.success(f"**Silhouette Score:** {silhouette:.3f}")
+    st.caption("A higher silhouette score (close to 1) means more distinct and well-separated clusters.")
 
     # PCA for 2D visualization
     pca = PCA(n_components=2)
@@ -233,16 +239,13 @@ if method == "K-Means Clustering":
         - The **x-axis** shows different values of `k` (clusters).
         - The **y-axis** shows the **inertia**, or within-cluster sum of squares (how compact clusters are).
 
-        **How to interpret:**
-        - You're looking for the **'elbow point'** — where the inertia decreases sharply and then flattens out.
-        - This point balances compactness and complexity: adding more clusters beyond this gives diminishing returns.
+        The **Silhouette Score** helps evaluate the **quality of clustering** by measuring how similar each point is to its own cluster compared to others.
 
-        **Why it matters:**  
-        Too few clusters = underfitting (merging distinct groups),  
-        Too many clusters = overfitting (splitting true groups unnecessarily).
-
-        **Silhouette Score** measures how well-separated the resulting clusters are. Higher values indicate better-defined clusters.
-        
+        - The **score ranges from -1 to 1**.
+        - A **higher score (close to 1)** means well-defined, well-separated clusters.
+        - A **score near 0** indicates overlapping clusters.
+        - A **negative score** suggests that samples might be assigned to the wrong clusters.
+    
         """)
     ks = range(2, 11)
     wcss = []
@@ -272,6 +275,27 @@ if method == "K-Means Clustering":
 
     st.pyplot(fig)
 
+    st.markdown("""
+        **How to interpret the Elbow Score:**
+        - You're looking for the **'elbow point'** — where the inertia decreases sharply and then flattens out.
+        - This point balances compactness and complexity: adding more clusters beyond this gives diminishing returns.
+
+        **Why the Elbow Score matters:**  
+        Too few clusters = underfitting (merging distinct groups),  
+        Too many clusters = overfitting (splitting true groups unnecessarily).
+                
+        **How to interpret the Silhouette Score:**
+        - Values **above 0.5** generally indicate good clustering.
+        - Values **between 0.2 and 0.5** may indicate overlapping or less distinct clusters.
+        - Values **below 0.2** suggest poor structure or potential overclustering.
+
+        **Why the Silhouette Score matters:**  
+        A high silhouette score implies that clusters are **internally cohesive** and **externally separated**,  
+        which is a key goal in unsupervised learning.  
+        Use it alongside the Elbow Method for a more complete picture of clustering performance.
+        
+    """)
+
 
         # Train model and get cluster labels
     kmeans = KMeans(n_clusters=k, random_state=0)
@@ -289,14 +313,14 @@ elif method == "Hierarchical Clustering":
 
     - Choose a **linkage method** (how distances are calculated between clusters).
     - Adjust `k` (number of clusters) and examine the **dendrogram**.
-    - Higher **silhouette score** still means better-defined clusters.
+    - Higher **silhouette score** means better-defined clusters.
 
     **Linkage options:**
     - `ward`: minimizes variance within clusters
     - `complete`: max distance between clusters
     - `average`: average distance
     - `single`: closest point distance
-    """)    
+    """)   
 
     # Feature Distribution / EDA
     st.markdown("#### 🔍 Feature Distributions (Histogram)")
@@ -386,11 +410,14 @@ elif method == "Principal Component Analysis":
     - **Noise reduction**
     - **Feature compression**
 
-    Use the slider to choose how many components to retain.
+    **Sidebar Navigation**
+    - **k (Number of Clusters):** Determines how many groups the algorithm tries to separate your data into.
+    - **PCA Components:** Number of principal components used to reduce dimensionality and plot your data.
     """)
 
-    # Component selector
-    n_components = st.sidebar.slider("Number of components", 2, min(10, X.shape[1]), 2)
+    #Sidebar controls
+    n_components = st.sidebar.slider("Number of PCA components", 2, min(10, X.shape[1]), 2)
+    k = st.sidebar.slider("Number of clusters (K)", 2, 10, 3)
 
     # Apply PCA
     pca = PCA(n_components=n_components)
@@ -404,16 +431,22 @@ elif method == "Principal Component Analysis":
     st.subheader("📉 PCA Results")
     st.markdown("""
     **Explained Variance Ratio** tells us how much information (variance) each principal component captures.  
-    **Cumulative Explained Variance** helps us decide how many components are needed to capture most of the dataset's structure.
     """)
     st.write("Explained Variance Ratio:", explained_variance.round(3))
+    st.markdown("""
+    **Cumulative Explained Variance** helps us decide how many components are needed to capture most of the dataset's structure.
+    """)
     st.write("Cumulative Explained Variance:", cumulative_variance.round(3))
 
     # 2. PCA Scatter Plot
     st.markdown("#### 🔍 PCA Scatter Plot")
     st.markdown("""
-    Shows data projected into the new coordinate system defined by the first two principal components.  
-    Each point represents a sample. If the data forms visible clusters, PCA has preserved some structure.
+    This plot displays the dataset projected into 2D space using the **first two principal components**.
+
+    **How to interpret:**
+    - Each point is a data sample.
+    - Visible clusters suggest PCA has preserved meaningful structure.
+    - Spread along axes reflects how much variance is retained.
     """)
     plt.figure(figsize=(8, 6))
     plt.scatter(X_pca[:, 0], X_pca[:, 1], alpha=0.7, edgecolor='k')
@@ -427,10 +460,13 @@ elif method == "Principal Component Analysis":
     if st.checkbox("Show PCA Biplot (with feature loadings)"):
         st.markdown("#### 🧭 Biplot: PCA Scores + Loadings")
         st.markdown("""
-        A biplot overlays feature directions on the PCA plot.  
-        Arrows show how original features contribute to principal components.  
-        Longer arrows = stronger influence. Directions indicate correlation with components.
-        """)
+        This biplot overlays data points in PCA space with **arrows** that represent feature contributions.
+
+        **How to interpret:**
+        - Longer arrows → stronger influence on components.
+        - Direction shows correlation between features and components.
+        - Samples in the direction of an arrow are associated with that feature.
+        """)        
         loadings = pca.components_.T
         scaling_factor = 3.0  # Adjust this as needed
         plt.figure(figsize=(8, 6))
@@ -449,8 +485,11 @@ elif method == "Principal Component Analysis":
     # 4. Scree Plot
     st.markdown("#### 📊 Scree Plot: Cumulative Explained Variance")
     st.markdown("""
-    This plot helps you determine how many components to retain by showing cumulative variance.  
-    Look for the **elbow point** where adding more components yields diminishing returns.
+    This line plot shows **how much total variance** is retained as components are added.
+
+    **How to interpret:**
+    - The elbow/knee point suggests a good cutoff.
+    - Diminishing returns after a certain number of components.
     """)
     pca_full = PCA(n_components=X.shape[1])
     X_pca_full = pca_full.fit_transform(X)
@@ -466,8 +505,11 @@ elif method == "Principal Component Analysis":
     # 5. Bar Plot of Individual Variance
     st.markdown("#### 📌 Bar Plot: Variance Explained by Each Component")
     st.markdown("""
-    Each bar shows how much variance is explained by a single principal component.  
-    Useful for identifying the most important components.
+    Each bar shows how much variance is explained by an individual component.
+
+    **How to interpret:**
+    - Taller bars = more important components.
+    - Use to see how quickly variance drops off across components.
     """)
     plt.figure(figsize=(8, 6))
     components = np.arange(1, len(pca_full.explained_variance_ratio_) + 1)
@@ -481,12 +523,13 @@ elif method == "Principal Component Analysis":
     # 6. Combined Plot (Bar + Line)
     st.markdown("#### 📈 Combined Plot: Individual and Cumulative Variance")
     st.markdown("""
-    This plot combines:
-    - Bars for variance explained by each component
-    - Line for cumulative variance
+    This chart combines two views:
+    - **Bars** = how much each component explains individually
+    - **Line** = cumulative variance up to each component
 
-    **Interpretation:**  
-    Look for the minimum number of components that explain ~90% of the variance.
+    **How to interpret:**
+    - Look for where the cumulative line crosses 90% – this is a good target for component retention.
+    - Use bars to identify especially strong components individually.
     """)
     explained = pca_full.explained_variance_ratio_ * 100
     cumulative = np.cumsum(explained)
