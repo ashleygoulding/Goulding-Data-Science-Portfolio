@@ -149,33 +149,123 @@ if method == "K-Means Clustering":
     # Cluster number selector
     k = st.sidebar.slider("Number of clusters (k)", 2, 10, 3)
 
-    # Train model and get cluster labels
+    # Fit KMeans model
+    kmeans = KMeans(n_clusters=k, random_state=0)
+    clusters = kmeans.fit_predict(X)
+    
+    # Silhouette Score evaluation
+    silhouette = silhouette_score(X, clusters)
+    st.write(f"**Silhouette Score:** {silhouette:.3f}")
+
+    # PCA for 2D visualization
+    pca = PCA(n_components=2)
+    X_pca = pca.fit_transform(X)
+
+    # 1: KMeans clustering in PCA space
+    st.markdown("### 🔵 K-Means Clustering (2D PCA Projection)")
+    st.markdown(
+        "This scatter plot shows how the K-Means algorithm grouped the observations using only the first two principal components. "
+        "Each point represents a data sample, colored by its cluster assignment."
+    )
+    plt.figure(figsize=(8, 6))
+    for i in range(k):
+        plt.scatter(X_pca[clusters == i, 0], X_pca[clusters == i, 1],
+                    alpha=0.7, edgecolor='k', s=60, label=f'Cluster {i}')
+    plt.xlabel('Principal Component 1')
+    plt.ylabel('Principal Component 2')
+    plt.title('K-Means Clustering: 2D PCA Projection')
+    plt.legend(loc='best')
+    plt.grid(True)
+    st.pyplot(plt)
+
+    # 2: True Labels if available 
+    if 'target' in df.columns:
+        y = df['target'].values
+        target_names = sorted(df['target'].unique())
+        st.markdown("### 🟠 True Labels in PCA Space")
+        st.markdown(
+            "This scatter plot uses the actual target labels to show the ground truth distribution of data. "
+            "By comparing this with the clustering output above, you can visually assess clustering quality."
+        )
+        plt.figure(figsize=(8, 6))
+        colors = sns.color_palette("Set1", len(target_names))
+        for i, label in enumerate(target_names):
+            plt.scatter(X_pca[y == label, 0], X_pca[y == label, 1],
+                        alpha=0.7, edgecolor='k', s=60, label=f'Class {label}')
+        plt.xlabel('Principal Component 1')
+        plt.ylabel('Principal Component 2')
+        plt.title('True Labels: 2D PCA Projection')
+        plt.legend(loc='best')
+        plt.grid(True)
+        st.pyplot(plt)
+
+        # Evaluate match (note: label alignment is arbitrary)
+        from sklearn.metrics import accuracy_score
+        from scipy.stats import mode
+
+        # Relabel clusters to best match ground truth using majority voting
+        new_labels = np.zeros_like(clusters)
+        for i in range(k):
+            mask = clusters == i
+            if np.sum(mask) == 0:
+                continue
+            new_labels[mask] = mode(y[mask], keepdims=True)[0]
+        accuracy = accuracy_score(y, new_labels)
+        st.write(f"**Adjusted Clustering Accuracy:** {accuracy * 100:.2f}%")
+        st.markdown("Note: Cluster labels are permuted automatically to best match the true labels.")
+
+    # 3: Elbow and Silhouette Evaluation ---
+    st.markdown("### 📊 Selecting Optimal k")
+    st.markdown("""
+        The **Elbow Method** plot helps you choose the **optimal number of clusters (k)** in K-Means.
+
+        - The **x-axis** shows different values of `k` (clusters).
+        - The **y-axis** shows the **inertia**, or within-cluster sum of squares (how compact clusters are).
+
+        **How to interpret:**
+        - You're looking for the **'elbow point'** — where the inertia decreases sharply and then flattens out.
+        - This point balances compactness and complexity: adding more clusters beyond this gives diminishing returns.
+
+        **Why it matters:**  
+        Too few clusters = underfitting (merging distinct groups),  
+        Too many clusters = overfitting (splitting true groups unnecessarily).
+
+        "**Silhouette Score** measures how well-separated the resulting clusters are. Higher values indicate better-defined clusters.
+        
+        """)
+    ks = range(2, 11)
+    wcss = []
+    silhouette_scores = []
+    for i in ks:
+        km = KMeans(n_clusters=i, random_state=42)
+        km.fit(X)
+        wcss.append(km.inertia_)
+        labels = km.labels_
+        silhouette_scores.append(silhouette_score(X, labels))
+
+    fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+
+    # Elbow plot
+    ax[0].plot(ks, wcss, marker='o')
+    ax[0].set_xlabel('Number of clusters (k)')
+    ax[0].set_ylabel('Within-Cluster Sum of Squares (WCSS)')
+    ax[0].set_title('Elbow Method for Optimal k')
+    ax[0].grid(True)
+
+    # Silhouette plot
+    ax[1].plot(ks, silhouette_scores, marker='o', color='green')
+    ax[1].set_xlabel('Number of clusters (k)')
+    ax[1].set_ylabel('Silhouette Score')
+    ax[1].set_title('Silhouette Scores by k')
+    ax[1].grid(True)
+
+    st.pyplot(fig)
+
+
+        # Train model and get cluster labels
     kmeans = KMeans(n_clusters=k, random_state=0)
     labels = kmeans.fit_predict(X)
     silhouette = silhouette_score(X, labels)
-
-    # Results
-    st.write(f"**Silhouette Score:** {silhouette:.3f} — closer to 1 means better-defined clusters.")
-
-    st.markdown("#### 🔍 Cluster Visualization (via PCA)")
-    st.markdown("We use PCA to reduce to 2D and show cluster separations visually.")
-    plot_pca_clusters(X, labels, "PCA-based Cluster Visualization")
-
-    st.markdown("#### 📉 Elbow Method Plot")
-    st.markdown("""
-    This plot helps you choose the **optimal number of clusters (k)** in K-Means.
-
-    - The **x-axis** shows different values of `k` (clusters).
-    - The **y-axis** shows the **inertia**, or within-cluster sum of squares (how compact clusters are).
-
-    **How to interpret:**
-    - You're looking for the **'elbow point'** — where the inertia decreases sharply and then flattens out.
-    - This point balances compactness and complexity: adding more clusters beyond this gives diminishing returns.
-
-    **Why it matters:**  
-    Too few clusters = underfitting (merging distinct groups),  
-    Too many clusters = overfitting (splitting true groups unnecessarily).
-    """)
 
 # ================================
 # HIERARCHICAL CLUSTERING
