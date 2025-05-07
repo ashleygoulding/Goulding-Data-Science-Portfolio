@@ -230,7 +230,7 @@ if method == "K-Means Clustering":
         Too few clusters = underfitting (merging distinct groups),  
         Too many clusters = overfitting (splitting true groups unnecessarily).
 
-        "**Silhouette Score** measures how well-separated the resulting clusters are. Higher values indicate better-defined clusters.
+        **Silhouette Score** measures how well-separated the resulting clusters are. Higher values indicate better-defined clusters.
         
         """)
     ks = range(2, 11)
@@ -271,8 +271,7 @@ if method == "K-Means Clustering":
 # HIERARCHICAL CLUSTERING
 # ================================
 elif method == "Hierarchical Clustering":
-    st.subheader("🔗 Hierarchical Clustering")
-
+    st.markdown("## 🌲 Hierarchical Clustering")
     st.markdown("""
     Hierarchical Clustering builds a tree of clusters without needing a fixed `k`. 
     We still cut the tree into a specific number of clusters for evaluation.
@@ -286,33 +285,25 @@ elif method == "Hierarchical Clustering":
     - `complete`: max distance between clusters
     - `average`: average distance
     - `single`: closest point distance
-    """)
+    """)    
 
-    linkage_method = st.sidebar.selectbox("Linkage Method", ["ward", "complete", "average", "single"])
-    k = st.sidebar.slider("Number of clusters", 2, 10, 3)
-
-    model = AgglomerativeClustering(n_clusters=k, linkage=linkage_method)
-    labels = model.fit_predict(X)
-    silhouette = silhouette_score(X, labels)
-
-    st.write(f"**Silhouette Score:** {silhouette:.3f}")
-
-    st.markdown("#### 🔍 Cluster Visualization (via PCA)")
+    # Feature Distribution / EDA
+    st.markdown("#### 🔍 Feature Distributions (Histogram)")
     st.markdown("""
-    This plot reduces your data to 2D using **Principal Component Analysis (PCA)**, then colors points based on the clustering result.
-
-    **Why use PCA here?**
-    - High-dimensional data can't be visualized easily.
-    - PCA projects it onto 2D while preserving variance.
-    - It lets us *see* how well-separated the clusters are.
-
-    **How to interpret:**
-    - Each point is a data row.
-    - Clusters should appear as distinct, tight groups.
-    - Overlapping clusters may indicate poor separation or that more informative features are needed.
+    This section gives a quick visual overview of the **distribution** of each numeric feature.
+    Histograms help us check for **skewed features**, **outliers**, or **non-normality** — all of which may impact clustering.
     """)
-    plot_pca_clusters(X, labels, "PCA-based Cluster Visualization")
+    features_df = df[selected_features]
+    fig, ax = plt.subplots(figsize=(12, 8))
+    features_df.hist(ax=ax, edgecolor="k", bins=15)
+    plt.suptitle("Distribution of Selected Features", y=1.02)
+    plt.tight_layout()
+    st.pyplot(fig)
 
+    # Standardize before clustering
+    X_scaled = StandardScaler().fit_transform(features_df)
+
+    # Dendrogram
     st.markdown("#### 🌲 Dendrogram")
     st.markdown("""
     The dendrogram shows the **hierarchical merging process** between observations in the dataset.
@@ -329,7 +320,46 @@ elif method == "Hierarchical Clustering":
 
     This helps you understand both structure and how many clusters make sense in your data.
     """)
-    plot_dendrogram(X, linkage_method)
+
+    from scipy.cluster.hierarchy import linkage, dendrogram
+
+    # Sidebar dropdown to allow the user to select a linkage method
+    # Each method determines how distances between clusters are calculated
+    linkage_method = st.sidebar.selectbox("Linkage Method", ["ward", "complete", "average", "single"], index=0,
+        help="""
+    - **ward**: minimizes within-cluster variance (best for Euclidean).
+    - **complete**: uses the maximum distance between cluster points.
+    - **average**: average distance between all pairs.
+    - **single**: nearest neighbor (may cause chaining).
+    """)
+
+    # Compute the linkage matrix based on the selected method
+    # This contains the hierarchical relationships between data points    
+    Z = linkage(X_scaled, method=linkage_method)
+    
+    # Extract labels for each observation — useful for dendrogram leaf labeling    
+    labels = df.index.astype(str).tolist()
+
+    # Plot the dendrogram
+    plt.figure(figsize=(20, 7))
+    dendrogram(Z, labels=labels)
+    plt.title("Hierarchical Clustering Dendrogram")
+    plt.xlabel("Data Point")
+    plt.ylabel("Distance")
+    st.pyplot(plt)
+
+    # Choose number of clusters
+    k = st.sidebar.slider("Number of Clusters", 2, 10, 3)
+    model = AgglomerativeClustering(n_clusters=k, linkage=linkage_method)
+    cluster_labels = model.fit_predict(X_scaled)
+
+    # Silhouette score
+    silhouette = silhouette_score(X_scaled, cluster_labels)
+    st.subheader("🔗 Hierarchical Clustering Results")
+    st.write(f"Silhouette Score: {silhouette:.3f}")
+
+    # Visualize clusters using PCA
+    plot_pca_clusters(X_scaled, cluster_labels, "Cluster Visualization (PCA Reduced)")
 
 # ================================
 # PRINCIPAL COMPONENT ANALYSIS
@@ -350,9 +380,6 @@ elif method == "Principal Component Analysis":
 
     # Component selector
     n_components = st.sidebar.slider("Number of components", 2, min(10, X.shape[1]), 2)
-
-    # Let user choose number of components
-    n_components = st.sidebar.slider("Number of PCA components", 2, min(10, X.shape[1]), 2)
 
     # Apply PCA
     pca = PCA(n_components=n_components)
