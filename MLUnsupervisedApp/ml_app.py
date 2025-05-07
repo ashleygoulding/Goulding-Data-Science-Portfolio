@@ -1,25 +1,16 @@
-# === Import necessary libraries ===
+# === Import required libraries ===
 import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-# scikit-learn: machine learning algorithms & utilities
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans, AgglomerativeClustering
 from sklearn.metrics import silhouette_score
-
-# scipy: used for creating hierarchical clustering dendrograms
 from scipy.cluster.hierarchy import dendrogram, linkage
 
-
-# ================================
-# Helper Functions
-# ================================
-
-# Loads sample datasets from sklearn if user chooses one
+# === Load sample dataset (Iris or Wine) ===
 def load_sample_dataset(name):
     if name == "Iris":
         from sklearn.datasets import load_iris
@@ -31,110 +22,110 @@ def load_sample_dataset(name):
         return None
     return pd.DataFrame(data.data, columns=data.feature_names)
 
-# Standardizes features by removing the mean and scaling to unit variance
-# This ensures all features contribute equally to distance-based models
+# === Standardize the data so all features are on the same scale ===
 def standardize_data(df):
     scaler = StandardScaler()
     return scaler.fit_transform(df)
 
-# Elbow plot helps user visually identify the optimal number of clusters (K)
+# === Elbow plot to help determine optimal number of clusters in K-Means ===
 def plot_elbow(X):
-    distortions = []  # List to hold inertia values for each k
-    K = range(1, 11)  # Try values of k from 1 to 10
+    distortions = []
+    K = range(1, 11)
     for k in K:
         kmeans = KMeans(n_clusters=k, random_state=0).fit(X)
-        distortions.append(kmeans.inertia_)  # Inertia: within-cluster sum of squares
+        distortions.append(kmeans.inertia_)
     plt.figure()
-    plt.plot(K, distortions, 'bx-')  # Plot K vs inertia
+    plt.plot(K, distortions, 'bx-')
     plt.xlabel('k (Number of Clusters)')
     plt.ylabel('Distortion (Inertia)')
     plt.title('Elbow Method For Optimal k')
     st.pyplot(plt)
 
-# Reduces data to 2D using PCA and plots the resulting cluster assignments
+# === Visualize clusters after PCA dimensionality reduction ===
 def plot_pca_clusters(X, labels, title):
-    pca = PCA(n_components=2)  # Reduce to 2 principal components for visualization
+    pca = PCA(n_components=2)
     components = pca.fit_transform(X)
     plt.figure()
     sns.scatterplot(x=components[:, 0], y=components[:, 1], hue=labels, palette="Set2")
     plt.title(title)
-    plt.xlabel("PC1")
-    plt.ylabel("PC2")
+    plt.xlabel("Principal Component 1")
+    plt.ylabel("Principal Component 2")
     st.pyplot(plt)
 
-# Creates a dendrogram for visualizing hierarchical clustering structure
+# === Draw dendrogram for hierarchical clustering ===
 def plot_dendrogram(X, method):
-    Z = linkage(X, method=method)  # Computes hierarchical clustering
+    Z = linkage(X, method=method)
     plt.figure(figsize=(10, 5))
-    dendrogram(Z, truncate_mode="level", p=5)  # Show last p merges
+    dendrogram(Z, truncate_mode="level", p=5)
     plt.title("Hierarchical Clustering Dendrogram")
     st.pyplot(plt)
 
-# Plots how much variance is explained by each principal component
+# === Show how much variance each PCA component explains ===
 def plot_pca_variance(pca):
     explained_var = pca.explained_variance_ratio_
     plt.figure()
     plt.plot(range(1, len(explained_var)+1), explained_var, marker='o')
-    plt.title("Explained Variance Ratio")
+    plt.title("Explained Variance Ratio by Component")
     plt.xlabel("Principal Component")
     plt.ylabel("Proportion of Variance Explained")
     st.pyplot(plt)
 
-
 # ================================
-# Streamlit App Interface
+# STREAMLIT INTERFACE STARTS HERE
 # ================================
 
-# Title of the application
+# === Main title and description ===
 st.title("🧠 Unsupervised Machine Learning Explorer")
 
-# Sidebar header for user controls
-st.sidebar.header("🔧 Model Controls")
+st.markdown("""
+Welcome to the Unsupervised ML Explorer!
 
-# === Dataset Uploading Section ===
-# Users can either upload a CSV file or choose a sample dataset
-uploaded_file = st.sidebar.file_uploader("Upload CSV Dataset", type="csv")
+This tool allows you to explore three key unsupervised learning techniques:
+
+- **K-Means Clustering**
+- **Hierarchical Clustering**
+- **Principal Component Analysis (PCA)**
+
+You can upload your own dataset or use one of the built-in ones. Visualizations and metrics will guide you through interpreting the results.
+
+---
+""")
+
+# === Sidebar for user controls ===
+st.sidebar.header("📁 Dataset Selection")
+
+# === Dataset Upload or Selection ===
+uploaded_file = st.sidebar.file_uploader("Upload your CSV dataset", type="csv")
 sample_dataset = st.sidebar.selectbox("Or select a sample dataset", ["None", "Iris", "Wine"])
 
-# === Load Dataset ===
+# === Load selected dataset ===
 if uploaded_file:
-    # If user uploads their own dataset
     df = pd.read_csv(uploaded_file)
 elif sample_dataset != "None":
-    # If user selects one of the built-in datasets
     df = load_sample_dataset(sample_dataset)
 else:
-    # If neither is provided, prompt user to upload or choose
-    st.warning("Please upload a dataset or select a sample one.")
+    st.warning("📂 Please upload a dataset or select a sample one from the sidebar.")
     st.stop()
 
-# === Show Dataset Preview ===
+# === Show dataset preview ===
 st.subheader("📊 Dataset Preview")
-st.write(df.head())  # Display first few rows of the dataset
+st.markdown("Here’s the first few rows of your dataset. Make sure it’s clean and contains mostly numeric data for clustering.")
+st.write(df.head())
 
-# === Feature Selection ===
-# Automatically selects only numeric columns for clustering/PCA
+# === Feature Selection Section ===
 numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
+selected_features = st.sidebar.multiselect("Select features for analysis", options=numeric_columns, default=numeric_columns)
 
-# Allow user to select which features (columns) to include
-selected_features = st.sidebar.multiselect(
-    "Feature Selection", 
-    options=numeric_columns, 
-    default=numeric_columns  # Select all numeric by default
-)
-
-# If no features are selected, default to all numeric columns
 if not selected_features:
-    st.info("No features selected. Using all numeric columns by default.")
+    st.info("ℹ️ No features selected. Using all numeric columns by default.")
     selected_features = numeric_columns
 
-# === Preprocess the Data ===
-# Standardize the selected numeric features
+# === Standardize the data ===
 X = standardize_data(df[selected_features])
 
-# === Algorithm Selection ===
-# User chooses which unsupervised learning method to explore
-method = st.sidebar.selectbox("Select Method", [
+# === Method Selection ===
+st.sidebar.header("⚙️ Select Unsupervised Method")
+method = st.sidebar.selectbox("Choose a technique to apply", [
     "K-Means Clustering", 
     "Hierarchical Clustering", 
     "Principal Component Analysis"
@@ -144,76 +135,119 @@ method = st.sidebar.selectbox("Select Method", [
 # K-MEANS CLUSTERING
 # ================================
 if method == "K-Means Clustering":
-    # User selects number of clusters
+    st.subheader("📈 K-Means Clustering")
+
+    st.markdown("""
+K-Means attempts to partition the dataset into **k distinct, non-overlapping clusters** based on feature similarity.
+
+Use the slider to adjust `k` — the number of clusters. Look at the **Silhouette Score** and **Elbow Plot** to find the best `k`.
+
+- A **higher silhouette score (close to 1)** means well-separated clusters.
+- The **elbow point** in the Elbow Plot suggests the optimal k.
+
+    """)
+
+    # Cluster number selector
     k = st.sidebar.slider("Number of clusters (k)", 2, 10, 3)
-    
-    # Apply K-Means clustering to standardized data
+
+    # Train model and get cluster labels
     kmeans = KMeans(n_clusters=k, random_state=0)
     labels = kmeans.fit_predict(X)
-    
-    # Compute silhouette score to evaluate clustering performance
     silhouette = silhouette_score(X, labels)
 
-    # === Display Results ===
-    st.subheader("📈 K-Means Clustering Results")
-    st.write(f"Silhouette Score: {silhouette:.3f} (Higher is better)")
-    
-    # Visualize clusters in 2D using PCA projection
-    plot_pca_clusters(X, labels, "Cluster Visualization (PCA Reduced)")
+    # Results
+    st.write(f"**Silhouette Score:** {silhouette:.3f} — closer to 1 means better-defined clusters.")
 
-    # Show elbow plot to guide user in selecting optimal k
-    st.subheader("📉 Elbow Plot")
+    st.markdown("#### 🔍 Cluster Visualization (via PCA)")
+    st.markdown("We use PCA to reduce to 2D and show cluster separations visually.")
+    plot_pca_clusters(X, labels, "PCA-based Cluster Visualization")
+
+    st.markdown("#### 📉 Elbow Method Plot")
+    st.markdown("Use this plot to determine a good value of `k` by looking for the point where the curve begins to flatten.")
     plot_elbow(X)
 
 # ================================
 # HIERARCHICAL CLUSTERING
 # ================================
 elif method == "Hierarchical Clustering":
-    # User selects linkage method and number of clusters
+    st.subheader("🔗 Hierarchical Clustering")
+
+    st.markdown("""
+Hierarchical Clustering builds a tree of clusters without needing a fixed `k`. 
+We still cut the tree into a specific number of clusters for evaluation.
+
+- Choose a **linkage method** (how distances are calculated between clusters).
+- Adjust `k` (number of clusters) and examine the **dendrogram**.
+- Higher **silhouette score** still means better-defined clusters.
+
+**Linkage options:**
+- `ward`: minimizes variance within clusters
+- `complete`: max distance between clusters
+- `average`: average distance
+- `single`: closest point distance
+""")
+
     linkage_method = st.sidebar.selectbox("Linkage Method", ["ward", "complete", "average", "single"])
     k = st.sidebar.slider("Number of clusters", 2, 10, 3)
-    
-    # Apply hierarchical clustering with chosen linkage method
+
     model = AgglomerativeClustering(n_clusters=k, linkage=linkage_method)
     labels = model.fit_predict(X)
-    
-    # Compute silhouette score
     silhouette = silhouette_score(X, labels)
 
-    # === Display Results ===
-    st.subheader("🔗 Hierarchical Clustering Results")
-    st.write(f"Silhouette Score: {silhouette:.3f}")
-    
-    # Visualize clustering results
-    plot_pca_clusters(X, labels, "Cluster Visualization (PCA Reduced)")
-    
-    # Show the dendrogram to illustrate clustering hierarchy
-    st.subheader("🌲 Dendrogram")
+    st.write(f"**Silhouette Score:** {silhouette:.3f}")
+
+    st.markdown("#### 🔍 Cluster Visualization (via PCA)")
+    st.markdown("PCA is used to visualize the hierarchical clusters.")
+    plot_pca_clusters(X, labels, "PCA-based Cluster Visualization")
+
+    st.markdown("#### 🌲 Dendrogram")
+    st.markdown("""
+This shows the clustering tree. Cut the tree horizontally to see how points merge into clusters.
+- The height of branches shows the distance (dissimilarity) at which clusters merge.
+- Look for large vertical gaps before a merge — they indicate natural splits.
+""")
     plot_dendrogram(X, linkage_method)
 
 # ================================
 # PRINCIPAL COMPONENT ANALYSIS
 # ================================
 elif method == "Principal Component Analysis":
-    # User selects number of components to retain
+    st.subheader("📉 Principal Component Analysis (PCA)")
+
+    st.markdown("""
+PCA reduces dimensionality by projecting data into a smaller number of components while retaining the most variance.
+
+This is helpful for:
+- **Visualization**
+- **Noise reduction**
+- **Feature compression**
+
+Use the slider to choose how many components to retain.
+""")
+
+    # Component selector
     n_components = st.sidebar.slider("Number of components", 2, min(10, X.shape[1]), 2)
 
-    # Apply PCA to reduce dimensionality
+    # Perform PCA
     pca = PCA(n_components=n_components)
     X_pca = pca.fit_transform(X)
     explained_var = pca.explained_variance_ratio_
 
-    # === Display Results ===
-    st.subheader("📉 PCA Results")
-    st.write("Explained Variance by Component:", explained_var.round(3))
+    st.markdown("#### 🔢 Explained Variance by Component")
+    st.markdown("""
+This shows how much variance (information) is captured by each component. Try to retain enough components to explain ~90% of the variance.
+""")
+    st.write(np.round(explained_var, 3))
 
-    # Show 2D PCA scatter plot
+    st.markdown("#### 📊 2D PCA Projection")
+    st.markdown("This scatter plot shows the first two principal components — a compressed view of your data.")
     plt.figure()
     sns.scatterplot(x=X_pca[:, 0], y=X_pca[:, 1])
     plt.xlabel("PC1")
     plt.ylabel("PC2")
-    plt.title("PCA Scatter Plot")
+    plt.title("2D PCA Projection")
     st.pyplot(plt)
 
-    # Show explained variance per component
+    st.markdown("#### 📈 Variance Explained Plot")
+    st.markdown("This plot helps determine how many principal components are worth keeping.")
     plot_pca_variance(pca)
