@@ -10,6 +10,7 @@ A summary of all projects can be seen below:
 
 -    Penguin Filter Hub
 -    Mutant Moneyball Cleaning and Analysis
+-    Supervised Machine Learning Explorer
 
 ----------------------------------------------------------------------
 ### Penguin Filter Hub
@@ -66,11 +67,36 @@ This project demonstrates my ability to:
 
 ----------------------------------------------------------------------
 
-### Project 3
+### Supervised Machine Learning Explorer
 
-   - What is the Problem? : explaination here
-   - How did I solve it? : explaination here
+[Click Here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/MLStreamlitApp)
 
-will add photos and/or videos to demonstrate here
+#### The Problem
+
+Many machine learning applications require users to understand complex models and their associated performance metrics. For individuals new to machine learning or those working with multiple datasets, choosing the right model, setting hyperparameters, and interpreting results can be daunting. There’s a need for an intuitive interface that simplifies the process of training models, evaluating their performance, and visualizing key metrics.
+
+#### The Solution
+
+To address this challenge, I developed an interactive app using Streamlit that allows users to explore supervised machine learning models and evaluate their performance. The app includes:
+- **Data Upload**: Users can upload their own dataset or use a sample dataset to get started.
+- **Model Selection**: Users can choose from different classifiers like Logistic Regression, Decision Trees, or K-Nearest Neighbors.
+- **Hyperparameter Tuning**: The app provides sliders for tuning hyperparameters such as regularization strength, maximum depth, and number of neighbors.
+- **Performance Metrics**: The app displays key metrics like accuracy, precision, recall, confusion matrix, and ROC curves to evaluate the model.
+- **Model Visualization**: For decision trees, the app generates a visual representation of the tree to help users understand how decisions are made.
+
+#### Model Evaluation Visualization Examples
+
+##### Confusion Matrix
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/52dbbbd3-a749-42b4-a2b7-26fab241a313" />
+
+##### ROC Curve
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/678f57b1-4ecb-4290-bb0f-e5deaa771a1d" />
+
+#### How this Complements my Portfolio
+This project demonstrates my ability to:
+- **Build interactive applications**: Using Streamlit, I created an app that provides real-time feedback and allows users to interact with machine learning models.
+- **Work with machine learning models**: I’ve applied machine learning algorithms like Logistic Regression, Decision Trees, and KNN and used standard preprocessing techniques such as feature scaling and encoding.
+- **Evaluate model performance**: I integrated performance metrics, including confusion matrices, classification reports, and ROC curves, to help users interpret model results.
+- **Deploy Python solutions**: The app is a fully deployable solution, showcasing my skills in integrating machine learning models into interactive web applications.
 
 ----------------------------------------------------------------------
