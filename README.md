@@ -1,22 +1,18 @@
 # Goulding-Data-Science-Portfolio
 
-## Overview:
+## At a Glance:
 
-In this portfolio, you’ll find a variety of projects that showcase my skills in Python and machine learning. From building machine learning models to creating interactive data visualizations, each project illustrates my ability to turn complex data into actionable insights.
+In this portfolio, you’ll find a variety of projects that showcase my skills in Python and machine learning. From building machine learning models to creating interactive data visualizations, each project illustrates my ability to turn complex data into actionable insights. A summary of all projects can be seen below:
 
-## Organization:
-
-A summary of all projects can be seen below:
-
--    Penguin Filter Hub
--    Mutant Moneyball Cleaning and Analysis
--    Supervised Machine Learning Explorer
--    Unsupervised Machine Learning Explorer
+-    [Penguin Filter Hub](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/basic-streamlit-app): A simple Streamlit app to interactively explore the Palmer Penguins dataset through dynamic filtering.
+-    [Mutant Moneyball Cleaning and Analysis](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/TidyData-Project): A data wrangling project that cleans and transforms a messy dataset for visual storytelling and trend analysis.
+-    [Supervised Machine Learning Explorer](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/MLStreamlitApp): An interactive app that trains and visualizes classification models with adjustable hyperparameters and performance metrics.
+-    [Unsupervised Machine Learning Explorer](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/MLUnsupervisedApp): A deployed Streamlit app for exploring clustering and dimensionality reduction (K-Means, Hierarchical Clustering, PCA) with customizable visual tools.
 
 ----------------------------------------------------------------------
 ### Penguin Filter Hub
 
-[Click here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/blob/main/basic-streamlit-app/main.py)
+[Click here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/basic-streamlit-app)
 
 #### The Problem
 
@@ -30,6 +26,14 @@ To address this, I built an interactive Streamlit web app that allows users to f
 - *Displaying real-time results*: Using `st.dataframe()` to update and show filtered data instantly.
 - *Enhancing usability*: Providing a clean interface for intuitive exploration of penguin characteristics.
 
+#### App Visualizations
+
+##### Flipper Length Filter
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/f807caf2-bf72-4c07-919d-a314e83e05ae" />
+
+##### Body Mass Filter
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/c2d85aeb-b577-4844-95bd-fd0fec3a433c" />
+
 #### How This Complements My Portfolio
 
 This project showcases my ability to:
@@ -41,7 +45,7 @@ This project showcases my ability to:
 ----------------------------------------------------------------------
 ## Mutant Moneyball Cleaning and Analysis
 
-[Click here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData.ipynb)
+[Click here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/TidyData-Project)
 
 #### The Problem
 
@@ -55,8 +59,13 @@ To solve this, I applied Tidy Data Principles to clean, transform, and restructu
 - *Summarizing insights*: Creating pivot tables with `pd.pivot()` to analyze trends by source and decade.
 - *Visualizing key findings*: Generating charts to highlight patterns and trends effectively.
 
-![image](https://github.com/user-attachments/assets/70c16f4f-eaaa-4a06-97ea-be87278704aa)
-![image](https://github.com/user-attachments/assets/72c176b3-bb5a-421a-a930-a200ae0c250f)
+#### Project Visualizations
+
+##### Line Chart: Value over Time
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/70c16f4f-eaaa-4a06-97ea-be87278704aa" />
+
+##### Bar Chart: Most Valuable Members
+<img width="525" alt="image" src="https://github.com/user-attachments/assets/72c176b3-bb5a-421a-a930-a200ae0c250f" />
 
 ### How this Complements My Portfolio
 
@@ -95,16 +104,16 @@ To address this challenge, I developed an interactive app using Streamlit that a
 
 #### How This Complements My Portfolio
 This project demonstrates my ability to:
-- **Build interactive applications**: Using Streamlit, I created an app that provides real-time feedback and allows users to interact with machine learning models.
-- **Work with machine learning models**: I’ve applied machine learning algorithms like Logistic Regression, Decision Trees, and KNN and used standard preprocessing techniques such as feature scaling and encoding.
-- **Evaluate model performance**: I integrated performance metrics, including confusion matrices, classification reports, and ROC curves, to help users interpret model results.
-- **Deploy Python solutions**: The app is a fully deployable solution, showcasing my skills in integrating machine learning models into interactive web applications.
+- *Build interactive applications*: Using Streamlit, I created an app that provides real-time feedback and allows users to interact with machine learning models.
+- *Work with machine learning models*: I’ve applied machine learning algorithms like Logistic Regression, Decision Trees, and KNN and used standard preprocessing techniques such as feature scaling and encoding.
+- *Evaluate model performance*: I integrated performance metrics, including confusion matrices, classification reports, and ROC curves, to help users interpret model results.
+- *Deploy Python solutions*: The app is a fully deployable solution, showcasing my skills in integrating machine learning models into interactive web applications.
 
 ----------------------------------------------------------------------
 
 ### Unsupervised Machine Learning Explorer
 
-[Click Here!](https://goulding-data-science-portfolio-6ljc4fdj5tutg2pvmvruqg.streamlit.app/)
+[Click Here!](https://github.com/ashleygoulding/Goulding-Data-Science-Portfolio/tree/main/MLUnsupervisedApp)
 
 #### The Problem
 
@@ -113,12 +122,12 @@ Understanding and applying unsupervised learning techniques like clustering and 
 #### The Solution
 
 To make unsupervised learning more accessible, I built an interactive Streamlit app that enables users to explore clustering and dimensionality reduction models on their own datasets or sample datasets. The app includes:
-- **Data Upload**: Users can upload a CSV file or select a sample dataset to begin analysis.
-- **Feature Selection**: Users choose which numeric features to include in the analysis.
-- **K-Means Clustering**: Includes elbow and silhouette score plots to guide cluster selection, along with cluster visualizations.
-- **Hierarchical Clustering**: Generates dendrograms and allows users to cut the tree at a chosen number of clusters for analysis.
-- **Principal Component Analysis (PCA)**: Displays explained variance, 2D projections, and biplots to visualize how features contribute to principal components.
-- **Downloadable Outputs**: Users can download clustered datasets for further analysis.
+- *Data Upload*: Users can upload a CSV file or select a sample dataset to begin analysis.
+- *Feature Selection*: Users choose which numeric features to include in the analysis.
+- *K-Means Clustering*: Includes elbow and silhouette score plots to guide cluster selection, along with cluster visualizations.
+- *Hierarchical Clustering*: Generates dendrograms and allows users to cut the tree at a chosen number of clusters for analysis.
+- *Principal Component Analysis (PCA)*: Displays explained variance, 2D projections, and biplots to visualize how features contribute to principal components.
+- *Downloadable Outputs*: Users can download clustered datasets for further analysis.
 
 #### Model Visualization Examples
 
@@ -130,7 +139,7 @@ To make unsupervised learning more accessible, I built an interactive Streamlit 
 
 #### How This Complements My Portfolio
 This project demonstrates my ability to:
-- **Implement and visualize unsupervised learning models**: Including clustering algorithms like K-Means and Hierarchical Clustering, and dimensionality reduction via PCA.
-- **Enhance data exploration tools**: The app helps users better understand the underlying structure of datasets through visual and statistical tools.
-- **Deploy end-to-end ML tools**: The app is packaged for deployment, showing my capacity to turn analytical models into accessible products.
+- *Implement and visualize unsupervised learning models*: Including clustering algorithms like K-Means and Hierarchical Clustering, and dimensionality reduction via PCA.
+- *Enhance data exploration tools*: The app helps users better understand the underlying structure of datasets through visual and statistical tools.
+- *Deploy end-to-end ML tools*: The app is packaged for deployment, showing my capacity to turn analytical models into accessible products.
 
