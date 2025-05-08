@@ -75,7 +75,7 @@ def plot_pca_variance(pca):
 # ================================
 
 # Main title and description
-st.title("🧠 Unsupervised Machine Learning Explorer")
+st.title("Unsupervised Machine Learning Explorer")
 
 st.markdown("""
 Welcome to the Unsupervised ML Explorer!
