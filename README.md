@@ -92,7 +92,7 @@ To address this challenge, I developed an interactive app using Streamlit that a
 ##### ROC Curve
 <img width="525" alt="image" src="https://github.com/user-attachments/assets/678f57b1-4ecb-4290-bb0f-e5deaa771a1d" />
 
-#### How this Complements my Portfolio
+#### How This Complements My Portfolio
 This project demonstrates my ability to:
 - **Build interactive applications**: Using Streamlit, I created an app that provides real-time feedback and allows users to interact with machine learning models.
 - **Work with machine learning models**: I’ve applied machine learning algorithms like Logistic Regression, Decision Trees, and KNN and used standard preprocessing techniques such as feature scaling and encoding.
@@ -100,3 +100,36 @@ This project demonstrates my ability to:
 - **Deploy Python solutions**: The app is a fully deployable solution, showcasing my skills in integrating machine learning models into interactive web applications.
 
 ----------------------------------------------------------------------
+
+### Unsupervised Machine Learning Explorer
+
+[Click Here!](https://goulding-data-science-portfolio-6ljc4fdj5tutg2pvmvruqg.streamlit.app/)
+
+#### The Problem
+
+Understanding and applying unsupervised learning techniques like clustering and dimensionality reduction can be challenging, especially when it comes to interpreting the results without labeled data. Users often lack intuitive tools to visualize the structure of their datasets, explore clusters, and grasp the effects of dimensionality reduction techniques like PCA.
+
+#### The Solution
+
+To make unsupervised learning more accessible, I built an interactive Streamlit app that enables users to explore clustering and dimensionality reduction models on their own datasets or sample datasets. The app includes:
+- **Data Upload**: Users can upload a CSV file or select a sample dataset to begin analysis.
+- **Feature Selection**: Users choose which numeric features to include in the analysis.
+- **K-Means Clustering**: Includes elbow and silhouette score plots to guide cluster selection, along with cluster visualizations.
+- **Hierarchical Clustering**: Generates dendrograms and allows users to cut the tree at a chosen number of clusters for analysis.
+- **Principal Component Analysis (PCA)**: Displays explained variance, 2D projections, and biplots to visualize how features contribute to principal components.
+- **Downloadable Outputs**: Users can download clustered datasets for further analysis.
+
+#### Model Visualization Examples
+
+##### K-Means Cluster Plot
+<img width="525" alt="kmeans" src="https://github.com/user-attachments/assets/7909409c-17d8-49d4-b991-c26d903a09c8" />
+
+##### PCA Biplot
+<img width="525" alt="pca" src="https://github.com/user-attachments/assets/88fc37a5-635d-482c-8848-1c45842822bf" />
+
+#### How This Complements My Portfolio
+This project demonstrates my ability to:
+- **Implement and visualize unsupervised learning models**: Including clustering algorithms like K-Means and Hierarchical Clustering, and dimensionality reduction via PCA.
+- **Enhance data exploration tools**: The app helps users better understand the underlying structure of datasets through visual and statistical tools.
+- **Deploy end-to-end ML tools**: The app is packaged for deployment, showing my capacity to turn analytical models into accessible products.
+
