@@ -88,13 +88,13 @@ PCA reduces the dimensionality of data while preserving as much variance as poss
 ## 🖼️ Visual Examples
 
 ### Elbow and Silhouette Plot (K-Means)
-![image](https://github.com/user-attachments/assets/2ec6a392-3730-4b73-8c6f-b180b42184fd)
+<img width="500" alt="species-filter" src="https://github.com/user-attachments/assets/2ec6a392-3730-4b73-8c6f-b180b42184fd">
 
 ### Dendrogram (Hierarchical Clustering)
-![image](https://github.com/user-attachments/assets/4ada3de2-a041-40c4-a39f-eef5c1b426a8)
+<img width="500" alt="species-filter" src="https://github.com/user-attachments/assets/4ada3de2-a041-40c4-a39f-eef5c1b426a8">
 
 ### PCA Biplot
-![image](https://github.com/user-attachments/assets/cb1b4379-1994-49e8-ad87-51521f056869)
+<img width="500" alt="species-filter" src="https://github.com/user-attachments/assets/cb1b4379-1994-49e8-ad87-51521f056869">
 
 ---
 
